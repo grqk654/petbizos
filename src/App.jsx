@@ -1065,7 +1065,19 @@ const Footer = ({ setPage }) => (
 const urlToPage = (pathname) => pathname.replace(/^\//, '') || 'home'
 const pageToUrl = (page) => page === 'home' ? '/' : '/' + page
 export default function App() {
-  const [page, setPage] = useState('home')
+  const [page, setPage] = useState(() => urlToPage(window.location.pathname))
+
+useEffect(() => {
+  const handlePop = () => setPage(urlToPage(window.location.pathname))
+  window.addEventListener('popstate', handlePop)
+  return () => window.removeEventListener('popstate', handlePop)
+}, [])
+
+const navigate = (newPage) => {
+  window.history.pushState({}, '', pageToUrl(newPage))
+  setPage(newPage)
+  window.scrollTo(0, 0)
+}
   const article = articles.find(a => a.id === page)
 
   return (
