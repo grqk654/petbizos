@@ -1090,14 +1090,14 @@ const navigate = (newPage) => {
         select, input[type=number] { outline: none; }
         button { outline: none; }
       `}</style>
-      <Nav page={page} setPage={setPage} />
-      {page === 'home' && <HomePage setPage={setPage} />}
+      <Nav page={page} setPage={navigate}/>
+      {page === 'home' && <HomePage setPage={navigate}/>}
       {page === 'directory' && <DirectoryPage />}
       {page === 'tools' && <ToolsPage />}
-      {page === 'guides' && <GuidesPage setPage={setPage} />}
+      {page === 'guides' && <GuidesPage setPage={navigate}/>}
       {page === 'forbusiness' && <ForBusinessPage />}
-      {article && <ArticlePage article={article} setPage={setPage} />}
-      <Footer setPage={setPage} />
+      {article && <ArticlePage article={article} setPage={navigate}/>}
+      <Footer setPage={navigate}/>
     </div>
   )
 }
